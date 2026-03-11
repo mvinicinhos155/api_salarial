@@ -42,7 +42,7 @@ func main() {
 	}))
 
 	
-	r.POST("/", func(c *gin.Context) {
+	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{"message" : "Api funcionando"})
 	})
 
