@@ -60,7 +60,7 @@ func HandlerCreateUser(db *sql.DB) gin.HandlerFunc {
 
 		if err := database.InsertUser(&user, db); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
-				"error": "Erro com banco de dados",
+				"error": err.Error(),
 			})
 			return
 		}
