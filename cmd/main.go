@@ -27,7 +27,6 @@ func main() {
 		port = "8080"
 	}
 
-	// Conecta no banco
 	db, err := database.Connect()
 	if err != nil {
 		log.Fatal("Erro ao conectar no banco:", err)
@@ -43,8 +42,8 @@ func main() {
 	}))
 
 	
-	r.POST("/hello", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message" : "Hello world"})
+	r.POST("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{"message" : "Api funcionando"})
 	})
 
 	r.POST("/user", handlers.HandlerCreateUser(db))

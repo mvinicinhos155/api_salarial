@@ -3,30 +3,27 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"os"
-
+	"fmt"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 func Connect() (*sql.DB, error) {
 
-		connStr := fmt.Sprintf(
-			"postgres://%s:%s@%s:%s/%s?sslmode=disable",
-			os.Getenv("DB_USER"),
-			os.Getenv("DB_PASSWORD"),
-			os.Getenv("DB_HOST"),
-			os.Getenv("DB_PORT"),
-			os.Getenv("DB_NAME"),
-		)
+	connStr := os.Getenv("DATABASE_URL")
 
 	db, err := sql.Open("pgx", connStr)
-
 	if err != nil {
-
-		return  nil, err
+		return nil, err
 	}
+
+	err = db.Ping()
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Banco conectado com sucesso")
 
 	return db, nil
 }
