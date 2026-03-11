@@ -16,9 +16,9 @@ func main() {
 
 	r := gin.Default()
 
-	err := godotenv.Load(".env")
+	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Erro ao carregar .env:", err)
+		log.Println("Arquivo .env não encontrado, usando variáveis de sistama")
 	} 
 
 	// Conecta no banco
