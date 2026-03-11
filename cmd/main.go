@@ -5,6 +5,7 @@ import (
 	"api_salarial/handlers"
 	"api_salarial/servers/middleware"
 	"log"
+	"os"
 	"time"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,11 @@ func main() {
 	if err != nil {
 		log.Println("Arquivo .env não encontrado, usando variáveis de sistama")
 	} 
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
 	// Conecta no banco
 	db, err := database.Connect()
@@ -55,5 +61,5 @@ func main() {
 	database.Migrations(db)
 
 	// Sobe servidor
-	r.Run()
+	r.Run(":" + port)
 }
